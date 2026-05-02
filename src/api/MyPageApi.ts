@@ -18,9 +18,9 @@ export const verifyPassword = async (password: string): Promise<boolean> => {
           },
         }
       );
-      return res.data.valid;
-    }catch (error: unknown) {
-      if (axios.isAxiosError(error)) {
+      return (res.data as any).valid;
+    }catch (error: any) {
+      if (error.isAxiosError) {
         const status = error.response?.status;
         const data = error.response?.data;
 
@@ -45,7 +45,7 @@ export const getUserInfo = async (): Promise<User> => {
       Authorization: token,
     },
   });
-  return res.data;
+  return res.data as any;
 };
 
 export const updateUserInfo = async (data: Omit<User, "loginId">): Promise<void> => {

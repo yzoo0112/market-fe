@@ -8,17 +8,13 @@ import { getDeletedPosts, permanentlyDeletePost, restorePost } from "../api/Tras
 
 export default function TrashPage() {
     const [posts, setPosts] = useState<TrashPost[]>([]);
-    const [loading, setLoading] = useState(false);
 
     const fetchTrash = async () => {
-        setLoading(true);
         try {
-            const res = await getDeletedPosts();
+            const res = await getDeletedPosts() as any;
             setPosts(res.data);
         } catch (error) {
             console.error("휴지통 불러오기 실패:", error);
-        } finally {
-            setLoading(false);
         }
     };
 
@@ -56,7 +52,7 @@ const handleDownloadExcel = async () => {
       }
     );
 
-    const blob = new Blob([response.data], {
+    const blob = new Blob([response.data as BlobPart], {
       type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
     });
     saveAs(blob, "deleted_posts.xlsx");

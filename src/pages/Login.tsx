@@ -28,7 +28,7 @@ export default function Login() {
       return;
     }
     getAuthToken(user)
-      .then((res) => {
+      .then((res: any) => {
         sessionStorage.setItem("userId", res.userId);
         sessionStorage.setItem("nickname", res.nickname);
         sessionStorage.setItem("role", res.role);

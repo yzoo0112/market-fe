@@ -39,7 +39,7 @@ export default function PostPage() {
 
     const fetchPostData = async () => {
         try {
-            const postResponse = await getPostId(Number(id));
+            const postResponse = await getPostId(Number(id)) as any;
             setPost(postResponse);
             setLiked(postResponse.LikedByUser);
             const commentResponse = await getComment(Number(id));
@@ -150,7 +150,7 @@ export default function PostPage() {
 
         try {
             await toggleLike(post.postId);
-            const summary = await getLikeSummary(post.postId); // liked + likeCount
+            const summary = await getLikeSummary(post.postId) as any; // liked + likeCount
             setLiked(summary.data.liked);
             setPost(prev => ({ ...prev, likeCount: summary.data.likeCount }));
         } catch (error) {

@@ -1,9 +1,10 @@
 // components/AdminRoute.tsx
 import { Navigate } from 'react-router-dom';
 import { useAuth } from '../contexts/AuthProvider';  // useAuth 훅을 사용하여 인증 상태 가져오기
+import type { ReactNode } from 'react';
 
 interface AdminRouteProps {
-  children: JSX.Element;
+  children: ReactNode;
 }
 
 export default function AdminRoute({ children }: AdminRouteProps) {

@@ -128,7 +128,7 @@ export default function PostEdit() {
         <Paper elevation={3} sx={{ p: 5, borderRadius: 3 }}>
           <Grid container spacing={4}>
             {/* 제목 */}
-            <Grid item xs={12}>
+            <Grid size={{ xs: 12 }}>
               <TextField
                 label="제목"
                 value={title}
@@ -139,7 +139,7 @@ export default function PostEdit() {
             </Grid>
 
             {/* 해시태그 */}
-            <Grid item xs={12}>
+            <Grid size={{ xs: 12 }}>
               <TextField
                 label="해시태그"
                 value={hashtag}
@@ -152,7 +152,7 @@ export default function PostEdit() {
             </Grid>
 
             {/* 본문 */}
-            <Grid item xs={12}>
+            <Grid size={{ xs: 12 }}>
               <TextField
                 label="본문 내용"
                 value={content}
@@ -165,7 +165,7 @@ export default function PostEdit() {
             </Grid>
 
             {/* 첨부파일 */}
-            <Grid item xs={12}>
+            <Grid size={{ xs: 12 }}>
               <Box display="flex" alignItems="center" gap={2}>
                 <Button variant="outlined" component="label">
                   파일 업로드
@@ -197,7 +197,7 @@ export default function PostEdit() {
             </Grid>
 
             {/* 버튼 */}
-            <Grid item xs={12} display="flex" justifyContent="flex-end" gap={2}>
+            <Grid size={{ xs: 12 }} display="flex" justifyContent="flex-end" gap={2}>
               <Button variant="contained" color="primary" onClick={handleUpdate}>
                 수정
               </Button>

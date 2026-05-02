@@ -42,7 +42,7 @@ export default function PostWrite() {
           formData.append("files", file);
 
           try {
-            const res = await fetch("http://localhost:8080/post/image", {
+            await fetch("http://localhost:8080/post/image", {
               method: "POST",
               body: formData,
               headers: {
@@ -112,7 +112,7 @@ export default function PostWrite() {
     <Container maxWidth="md" sx={{ mt: 6, mb: 6 }}>
       <Paper elevation={3} sx={{ p: 5, borderRadius: 3 }}>
         <Box display="flex" flexDirection="column" gap={3}>
-          <Grid item xs={12}>
+          <Grid size={{ xs: 12 }}>
             <TextField
               label="제목"
               value={title}

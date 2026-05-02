@@ -11,7 +11,7 @@ import {
 } from "@mui/material";
 
 export default function AdminUserList() {
-  const [users, setUsers] = useState([]);
+  const [users, setUsers] = useState<any[]>([]);
 
   useEffect(() => {
     const token = sessionStorage.getItem("jwt");

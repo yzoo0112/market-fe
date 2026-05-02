@@ -28,5 +28,5 @@ export const getManageSettings = async (): Promise<ManageSettings> => {
             Authorization: `Bearer ${token}`,
         }
     });
-    return response.data;
+    return response.data as any;
   };

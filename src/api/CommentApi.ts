@@ -4,24 +4,25 @@ import type { Comment, CommentCreateRequest, DComment, UpdateCommentLoad } from 
 //댓글 수정
 export const updateComment = async (CommentData: UpdateCommentLoad): Promise<Comment> => {
     const token = sessionStorage.getItem("jwt")
-    return axios.put(`/api/post/${CommentData.postId}/comment/${CommentData.commentId}`, CommentData,
+    const res = await axios.put(`/api/post/${CommentData.postId}/comment/${CommentData.commentId}`, CommentData,
         {
             headers: { Authorization: `Bearer ${token}` }
         }
     );
+    return res.data as any;
 };
 
 //댓글 조회
 export const getComment = async (postId: number): Promise<Comment[]> => {
     const response = await axios
         .get(`/api/post/${postId}/comment`);
-    return response.data;
+    return response.data as any;
 };
 
 //댓글 작성
 export const createComment = async (CommentData: CommentCreateRequest): Promise<void> => {
     const token = sessionStorage.getItem("jwt");
-    return await axios.post(`/api/post/${CommentData.postId}/comment`,
+    await axios.post(`/api/post/${CommentData.postId}/comment`,
         // comment: CommentData.comment,
         // userId: CommentData.userId, // 세션스토리지에서 꺼낸 값
         CommentData,
