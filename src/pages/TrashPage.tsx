@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Button, Table, TableBody, TableCell, TableHead, TableRow, Typography, Box, Stack } from "@mui/material";
-import axios from "axios";
 import { saveAs } from "file-saver";
+import api from "../api/axiosConfig";
 
 import type { TrashPost } from "../type";
 import { getDeletedPosts, permanentlyDeletePost, restorePost } from "../api/TrashApi";
@@ -42,15 +42,9 @@ export default function TrashPage() {
  // 🔽 엑셀 다운로드
 const handleDownloadExcel = async () => {
   try {
-    const response = await axios.get(
-      "http://localhost:8080/post/manage/trash/excel", // 백엔드와 통일
-      {
-        responseType: "blob",
-        headers: {
-          Authorization: sessionStorage.getItem("jwt") || "",
-        },
-      }
-    );
+    const response = await api.get("/post/manage/trash/excel", {
+      responseType: "blob",
+    });
 
     const blob = new Blob([response.data as BlobPart], {
       type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",

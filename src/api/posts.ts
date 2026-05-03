@@ -1,4 +1,4 @@
-import axios from 'axios';
+import api from "./axiosConfig";
 import type { ViewPost } from '../type';
 
 type SortKeyType = 'postId' | 'title' | 'nickname' | 'views' | 'create_at' | 'update_at';
@@ -17,6 +17,6 @@ interface ApiResponse {
 }
 
 export const getPosts = async (params: ParamsType): Promise<ApiResponse> => {
-  const response = await axios.get<ApiResponse>('/api/posts', { params });
+  const response = await api.get<ApiResponse>('/posts', { params });
   return response.data;
-}
+};

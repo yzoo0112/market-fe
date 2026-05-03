@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import api from "../api/axiosConfig";
 import {
   Button,
   TextField,
@@ -42,23 +43,7 @@ export default function PostWrite() {
           formData.append("files", file);
 
           try {
-            await fetch("http://localhost:8080/post/image", {
-              method: "POST",
-              body: formData,
-              headers: {
-                Authorization: `Bearer ${sessionStorage.getItem("jwt")}`,
-              },
-            });
-
-            // if (!res.ok) throw new Error("이미지 업로드 실패");
-
-            // const result = await res.json();
-            // const imageUrl = `http://localhost:8080/uploads/${result.savedFileName}`;
-
-            // setContent((prev) =>
-            //   prev +
-            //   `\n<img src="${imageUrl}" alt="${file.name}" style="max-width:100%; height:auto;" />\n`
-            // );
+            await api.post("/post/image", formData);
           } catch (error) {
             console.error("이미지 업로드 중 오류 발생:", error);
             alert("이미지 업로드 실패: 콘솔을 확인하세요.");
@@ -81,15 +66,7 @@ export default function PostWrite() {
     formData.append("userId", sessionStorage.getItem("userId")!);
 
     try {
-      const res = await fetch("http://localhost:8080/post", {
-        method: "POST",
-        body: formData,
-        headers: {
-          Authorization: `${sessionStorage.getItem("jwt")}`,
-        },
-      });
-
-      if (!res.ok) throw new Error("등록 실패");
+      await api.post("/post", formData);
 
       alert("게시글이 등록되었습니다.");
       navigate("/");

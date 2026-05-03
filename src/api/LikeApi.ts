@@ -1,24 +1,9 @@
-import axios from "axios";
+import api from "./axiosConfig";
 
 export const toggleLike = async (postId: number) => {
-    const token = sessionStorage.getItem("jwt");
-    return await axios.post(
-        `/api/post/${postId}/like`,
-        {},
-        {
-            headers: {
-                Authorization: `Bearer ${token}`,
-            },
-        }
-    );
+    return await api.post(`/post/${postId}/like`, {});
 };
 
 export const getLikeSummary = async (postId: number) => {
-    const token = sessionStorage.getItem("jwt");
-    return await axios.get(`/api/post/${postId}/like/summary`, {
-        headers: {
-            Authorization: `Bearer ${token}`,
-        },
-    });
+    return await api.get(`/post/${postId}/like/summary`);
 };
-

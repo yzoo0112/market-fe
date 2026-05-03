@@ -1,4 +1,4 @@
-import axios from 'axios';
+import api from "./axiosConfig";
 
 export interface ManageSettings {
   fileExtension: string;
@@ -8,25 +8,11 @@ export interface ManageSettings {
 
 // PUT - 관리 설정 업데이트
 export const updateManageSettings = async (data: ManageSettings) => {
-  
-  const token = sessionStorage.getItem('jwt')
-  
-  const response = await axios.put('/api/manage/fileSetting', data, {
-    headers: {
-        authorization: `Bearer ${token}`,
-    },
-  });
+  const response = await api.put("/manage/fileSetting", data);
   return response.data;
 };
 
 export const getManageSettings = async (): Promise<ManageSettings> => {
-    
-    const token = sessionStorage.getItem('jwt')
-
-    const response = await axios.get('/api/manage/fileSetting', {
-        headers: {
-            Authorization: `Bearer ${token}`,
-        }
-    });
-    return response.data as any;
-  };
+  const response = await api.get("/manage/fileSetting");
+  return response.data as any;
+};

@@ -1,28 +1,16 @@
-import axios from "axios";
+import api from "./axiosConfig";
 
-//휴wl통 호출
+// 휴지통 목록 조회
 export const getDeletedPosts = () => {
-    return axios.get("/api/post/manage/trash", {
-        headers: {
-            Authorization: `Bearer ${sessionStorage.getItem("jwt")}`,
-        },
-    });
+    return api.get("/post/manage/trash");
 };
 
-//복구
+// 복구
 export const restorePost = (postId: number) => {
-    return axios.patch(`/api/post/manage/${postId}/restore`, {}, {
-        headers: {
-            Authorization: `Bearer ${sessionStorage.getItem("jwt")}`,
-        },
-    });
+    return api.patch(`/post/manage/${postId}/restore`, {});
 };
 
-//영구삭제
+// 영구삭제
 export const permanentlyDeletePost = (postId: number) => {
-    return axios.delete(`/api/post/manage/trash/${postId}`, {
-        headers: {
-            Authorization: `Bearer ${sessionStorage.getItem("jwt")}`,
-        },
-    });
+    return api.delete(`/post/manage/trash/${postId}`);
 };

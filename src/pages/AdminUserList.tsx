@@ -9,13 +9,13 @@ import {
   TableBody,
   Typography,
 } from "@mui/material";
+import api from "../api/axiosConfig";
 
 export default function AdminUserList() {
   const [users, setUsers] = useState<any[]>([]);
 
   useEffect(() => {
     const token = sessionStorage.getItem("jwt");
-    console.log("JWT 토큰:", token);
 
     if (!token || !token.includes(".")) {
       console.error("유효하지 않은 토큰입니다. 로그인 후 다시 시도하세요.");
@@ -23,16 +23,9 @@ export default function AdminUserList() {
       return;
     }
 
-    fetch("http://localhost:8080/manage/users", {
-      headers: {
-        Authorization: "Bearer " + token,
-      },
-    })
+    api.get("/manage/users")
       .then((res) => {
-        if (!res.ok) throw new Error("서버 오류");
-        return res.json();
-      })
-      .then((data) => {
+        const data = res.data;
         if (!Array.isArray(data)) throw new Error("응답이 배열이 아님");
         setUsers(data);
       })

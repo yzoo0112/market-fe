@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
+import api from "../api/axiosConfig";
 import {
   Button,
   TextField,
@@ -13,6 +14,7 @@ import {
   ListItemText,
 } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
+import type { Post } from "../type";
 
 interface FileType {
   name: string;
@@ -40,13 +42,8 @@ export default function PostEdit() {
       return;
     }
 
-    fetch(`http://localhost:8080/post/${id}`, {
-      headers: { Authorization: token },
-    })
-      .then(res => {
-        if (!res.ok) throw new Error("게시글을 불러오지 못했습니다.");
-        return res.json();
-      })
+    api.get<Post>(`/post/${id}`)
+      .then(res => res.data)
       .then(data => {
         setTitle(data.title);
         setHashtags(data.hashtag);
@@ -100,13 +97,8 @@ export default function PostEdit() {
     removedFiles.forEach(id => formData.append("removedFiles", id.toString()));
 
     try {
-      const res = await fetch(`http://localhost:8080/post/${id}`, {
-        method: "PUT",
-        body: formData,
-        headers: { Authorization: sessionStorage.getItem("jwt")! },
-      });
-
-      if (!res.ok) throw new Error("수정 실패");
+      const res = await api.put(`/post/${id}`, formData);
+      if (!res.data) throw new Error("수정 실패");
 
       alert("게시글이 수정되었습니다.");
       navigate("/"); // 메인 페이지로 이동

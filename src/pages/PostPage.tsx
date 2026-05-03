@@ -8,6 +8,7 @@ import { useAuthStore } from "../store";
 import { getLikeSummary, toggleLike } from "../api/LikeApi";
 import { Heart } from 'lucide-react'
 import DOMPurify from "dompurify";
+import api from "../api/axiosConfig";
 
 export default function PostPage() {
     const { id } = useParams();
@@ -162,29 +163,20 @@ export default function PostPage() {
     //다운로드
     const downloadFile = async (fileName: string) => {
         try {
-            const token = sessionStorage.getItem("jwt");
-
-            const res = await fetch(
-                `http://localhost:8080/post/files/download?filename=${encodeURIComponent(fileName)}`,
-                {
-                    headers: {
-                        Authorization: `Bearer ${token}`,
-                    },
-                }
+            const res = await api.get(
+                `/post/files/download?filename=${encodeURIComponent(fileName)}`,
+                { responseType: "blob" }
             );
 
-            if (!res.ok) throw new Error("파일 다운로드 실패");
-
-            const blob = await res.blob();
+            const blob = new Blob([res.data as BlobPart]);
             const url = window.URL.createObjectURL(blob);
 
             const link = document.createElement("a");
             link.href = url;
-            link.download = fileName;  // 저장할 파일 이름 지정
+            link.download = fileName;
             document.body.appendChild(link);
             link.click();
 
-            // 정리
             document.body.removeChild(link);
             window.URL.revokeObjectURL(url);
         } catch (error) {
@@ -250,7 +242,7 @@ export default function PostPage() {
                         .map((file, idx) => (
                             <img
                                 key={idx}
-                                src={`http://localhost:8080${file.fileUrl}`}
+                                src={`${import.meta.env.VITE_API_URL}${file.fileUrl}`}
                                 alt={file.fileOrgname}
                                 style={{
                                     width: "100%",

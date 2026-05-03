@@ -1,18 +1,9 @@
-
-import axios from "axios";
+import api from "./axiosConfig";
 import dayjs from "dayjs";
-import { BASE_URL } from "./LoginApi";
 import type { RawVisit, VisitData } from "../type";
 
 export const getVisitCount = async (): Promise<VisitData> => {
-  const token = sessionStorage.getItem("jwt");
-  if (!token) throw new Error("로그인 토큰이 없습니다.");
-
-  const res = await axios.get<RawVisit[]>(`${BASE_URL}/manage/visit`, {
-    headers: {
-      Authorization: token,
-    },
-  });
+  const res = await api.get<RawVisit[]>("/manage/visit");
 
   const rawData = res.data;
 
