@@ -24,6 +24,8 @@ export default function SignUpPage() {
 
     const [emailCheck, setEmailCheck] = useState<null | boolean>(null);
     const [nicknameCheck, setNicknameCheck] = useState<null | boolean>(null);
+    const [phoneCheck, setPhoneCheck] = useState<null | boolean>(null);
+
 
     const fieldLabels: Record<keyof User, string> = {
         loginId: "아이디",
@@ -49,6 +51,13 @@ export default function SignUpPage() {
         });
     };
 
+    const handleCheckPhone = () => {
+        checkDuplicatePhone(user.phoneNum).then((exists) => {
+            setPhoneCheck(exists);
+        });
+    };
+
+
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setUser({...user, [e.target.name]: e.target.value});
     }
@@ -64,23 +73,23 @@ export default function SignUpPage() {
         return;
     }
 
-    if (emailCheck === null || nicknameCheck === null) {
-        alert("이메일과 닉네임의 중복 확인을 먼저 해주세요.");
+    if (emailCheck === null || nicknameCheck === null || phoneCheck === null) {
+        alert("이메일, 닉네임, 전화번호의 중복 확인을 먼저 해주세요.");
         return;
     }
 
-    try {
-        const phoneExists = await checkDuplicatePhone(user.phoneNum);
-
-        if (phoneExists) {
-        alert("이미 가입한 전화번호입니다.");
+    if (emailCheck || nicknameCheck || phoneCheck) {
+        alert("중복된 정보가 있습니다. 확인 후 다시 시도해주세요.");
         return;
-        }
+    }
 
+
+    try {
         await signUp(user);
         alert("회원가입 성공!");
         navigate("/login");
     } catch (error) {
+
         alert("회원가입에 실패했습니다.");
     }
     };
@@ -146,6 +155,11 @@ export default function SignUpPage() {
                 value={user.phoneNum}
                 onChange={handleChange}
             />
+
+            <Button onClick={handleCheckPhone}>중복 확인</Button>
+            {phoneCheck === true && <span style={{ color: "red" }}>이미 가입된 전화번호입니다</span>}
+            {phoneCheck === false && <span style={{ color: "green" }}>사용 가능한 전화번호입니다</span>}
+
             <TextField 
                 label="주소"
                 name="addr"
