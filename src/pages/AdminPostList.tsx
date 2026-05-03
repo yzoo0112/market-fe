@@ -1,10 +1,10 @@
 import { DataGrid, type GridColDef } from "@mui/x-data-grid";
 import { useState, useEffect } from "react";
-import type { ViewPost } from "../types";
+import type { ViewPost } from "../type";
 import { Box, Button, Dialog, DialogActions, DialogContent, DialogTitle, FormControlLabel, IconButton, MenuItem, Radio, RadioGroup, Select } from "@mui/material";
 import FilterListIcon from '@mui/icons-material/FilterList';
 import { useSearch } from "../contexts/useSearch";
-import { getPosts } from "../api/posts";  // API import
+import { getPosts } from "../api/posts";
 import { useNavigate } from "react-router-dom";
 
 export default function AdminPostList() {
@@ -49,7 +49,7 @@ export default function AdminPostList() {
             sortOrder,
             keyword: keyword || undefined,
         })
-            .then(({ data,total }) => {
+            .then(({ data, total }) => {
                 const filtered = data.filter((post) => !post.deleted);
                 setPosts(filtered);
                 setTotal(total);
@@ -76,8 +76,6 @@ export default function AdminPostList() {
 
     return (
         <Box>
-            {/* <MainSearch /> */}
-
             <Box display="flex" justifyContent="space-between" alignItems="center" mb={0.1}>
                 <IconButton onClick={openSortDialog}>
                     <FilterListIcon />
@@ -90,7 +88,7 @@ export default function AdminPostList() {
                 getRowId={(row) => row.postId}
                 hideFooter
                 loading={loading}
-                onRowClick={(params) => navigate(`/post/${params.id}`)} //상세페이지로 이동할 때 필요
+                onRowClick={(params) => navigate(`/post/${params.id}`)}
                 autoHeight
             />
 

@@ -15,7 +15,7 @@ export default function AdminUserList() {
 
   useEffect(() => {
     const token = sessionStorage.getItem("jwt");
-    console.log("JWT 토큰:", token); // ✅ 토큰 확인
+    console.log("JWT 토큰:", token);
 
     if (!token || !token.includes(".")) {
       console.error("유효하지 않은 토큰입니다. 로그인 후 다시 시도하세요.");

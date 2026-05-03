@@ -1,5 +1,5 @@
 import axios from 'axios';
-import type { ViewPost } from '../types';
+import type { ViewPost } from '../type';
 
 type SortKeyType = 'postId' | 'title' | 'nickname' | 'views' | 'create_at' | 'update_at';
 

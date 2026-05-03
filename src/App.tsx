@@ -11,13 +11,13 @@ import PostWrite from "./pages/PostWrite";
 import TableView from './components/TableView'
 import { SearchProvider } from './contexts/SearchProvider'
 import PostEdit from './pages/PostEdit'
-import AdminUserList from './list/AdminUserList'
+import AdminUserList from './pages/AdminUserList'
 import TrashPage from './pages/TrashPage'
 import ManagePage from './pages/ManagePage'
 import ManageFileSetting from './components/ManageFileSetting'
 import AdminRoute from './components/AdminRoute'
 import { AuthProvider } from './contexts/AuthProvider'
-import AdminPostList from './list/AdminPostList'
+import AdminPostList from './pages/AdminPostList'
 
 
 

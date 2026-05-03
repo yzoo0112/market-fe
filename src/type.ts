@@ -110,3 +110,15 @@ export type VisitData = {
   monthly: { month: string; count: number }[];
 };
 
+// 게시글 목록 조회용 (ViewPost)
+export type ViewPost = {
+  postId: number;
+  title: string;
+  contents?: string;
+  nickname: string;
+  views: number;
+  create_at: string;
+  update_at: string;
+  hashtag?: string[];
+  deleted: boolean;
+};

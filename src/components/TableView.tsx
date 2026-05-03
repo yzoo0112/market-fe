@@ -1,6 +1,6 @@
 import { DataGrid, type GridColDef } from "@mui/x-data-grid";
 import { useState, useEffect } from "react";
-import type { ViewPost } from "../types";
+import type { ViewPost } from "../type";
 import { Box, Button, Dialog, DialogActions, DialogContent, DialogTitle, FormControlLabel, IconButton, MenuItem, Radio, RadioGroup, Select } from "@mui/material";
 import FilterListIcon from '@mui/icons-material/FilterList';
 import { useSearch } from "../contexts/useSearch";
