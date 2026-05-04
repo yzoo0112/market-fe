@@ -35,7 +35,17 @@ export default function Header() {
     <div className="header">
       {/* 왼쪽: 로고 */}
       <div className="header-left">
-        <span className="logo-text" onClick={() => navigate("/")}>
+        <span className="logo-text" onClick={() => navigate("/")} style={{ display: 'flex', alignItems: 'center' }}>
+          <img 
+            src="/carret_favicon.png" 
+            alt="logo icon" 
+            style={{ 
+              height: '50px', 
+              width: 'auto', 
+              marginRight: '10px',
+              marginBottom: '5px'
+            }} 
+          />
           캐럿마켓
         </span>
       </div>
