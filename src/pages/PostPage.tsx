@@ -254,6 +254,11 @@ export default function PostPage() {
                         ))}
 
                     <div
+                        style={{ 
+                            whiteSpace: 'pre-wrap', 
+                            color: 'black',
+                            wordBreak: 'break-word'
+                        }}
                         dangerouslySetInnerHTML={{
                             __html: DOMPurify.sanitize(post.content),
                         }}

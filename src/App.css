@@ -50,8 +50,10 @@ html, body {
   justify-content: space-between;
   align-items: center;
   padding: 0 2rem;
-  background-color: transparent;
+  background-color: #ffffff; /* 투명도 제거 */
+  border-bottom: 1px solid #eee; /* 구분선 추가 */
   z-index: 1000;
+
   min-width: 1000px; /* body와 같은 값으로 맞추기 */
 }
 
