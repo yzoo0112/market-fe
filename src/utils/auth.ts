@@ -21,8 +21,7 @@ export function isAdmin(token: string): boolean {
   
       const cleanToken = token.replace(/^Bearer\s/, '');
       const decoded = jwtDecode<{ sub: string; roles?: string[] | string }>(cleanToken);
-      console.log("✅ decoded token:", decoded);
-  
+      
       const roles = decoded.roles;
   
       if (Array.isArray(roles)) {
